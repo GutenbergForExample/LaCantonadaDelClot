@@ -102,8 +102,7 @@ class WpMenuCart_Settings {
 			'plugin_settings',
 			array(
 				'menu'			=> $option,
-				'id'			=> 'flyout_display',
-				'disabled'		=> true,
+				'id'			=> 'flyout_display'
 			)
 		);
 		
@@ -128,8 +127,7 @@ class WpMenuCart_Settings {
 						'8'			=> '8',
 						'9'			=> '9',
 						'10'		=> '10',
-				),
-				'disabled'		=> true,
+				)
 			)
 		);			
 
