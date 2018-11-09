@@ -71,9 +71,7 @@ class SmartSlider3 {
             require_once dirname(__FILE__) . '/integrations/jetpack.php';
         }
 
-        if (defined('GUTENBERG_VERSION')) {
-            require_once dirname(__FILE__) . '/integrations/gutenberg/block.php';
-        }
+        require_once dirname(__FILE__) . '/integrations/gutenberg/block.php';
 
 
         if (defined('TABLEPRESS_ABSPATH')) {
@@ -87,6 +85,7 @@ class SmartSlider3 {
             if (isset($_GET['n2prerender']) && isset($_GET['n2app'])) {
                 $ret = false;
             }
+
             return $ret;
         }, 1000000);
 

@@ -72,9 +72,9 @@ abstract class N2SmartSliderAbstract extends N2SmartSliderRenderableAbstract {
     private $sliderRow = null;
 
     public $exposeSlideData = array(
-        'title'       => false,
-        'description' => false,
-        'thumbnail'   => false,
+        'title'         => false,
+        'description'   => false,
+        'thumbnail'     => false,
         'thumbnailType' => false
     );
 
@@ -124,7 +124,7 @@ abstract class N2SmartSliderAbstract extends N2SmartSliderRenderableAbstract {
         if (!class_exists($class, false)) {
 
             N2Loader::importPath(N2SSPluginSliderType::getSliderType($type)
-                    ->getPath() . $resourceName);
+                                                     ->getPath() . $resourceName);
         }
 
         return new $class($this);
@@ -344,6 +344,8 @@ abstract class N2SmartSliderAbstract extends N2SmartSliderRenderableAbstract {
             }
             $slider = $aliasCode . $slider;
         }
+
+        $slider = N2Html::tag("div", array('class' => 'n2-section-smartslider'), $slider);
 
         if (intval($this->params->get('clear-both', 0))) {
             $slider = '<div class="n2-clear"></div>' . $slider;

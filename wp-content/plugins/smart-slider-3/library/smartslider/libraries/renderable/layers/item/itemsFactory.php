@@ -30,6 +30,10 @@ class N2SmartSliderItemsFactory {
             self::sortItems();
 
             self::$itemGroups[n2_('Content')] = array();
+            self::$itemGroups[n2_('Image')] = array();
+            self::$itemGroups[n2_('Media')] = array();
+            self::$itemGroups[n2_('Special')] = array();
+            self::$itemGroups[n2_('Advanced')] = array();
 
             foreach (self::$items as $type => $item) {
                 $group = $item->getGroup();

@@ -114,22 +114,8 @@ class N2SSPluginItemFactoryHeading extends N2SSPluginItemFactoryAbstract {
         new N2ElementUrl($link, 'link-1', n2_('Link'), '', array(
             'style' => 'width:236px;'
         ));
-        new N2ElementList($link, 'link-2', n2_('Target window'), '', array(
-            'options' => array(
-                '_self'  => n2_('Self'),
-                '_blank' => n2_('New')
-            )
-        ));
-        new N2ElementList($link, 'link-3', 'Rel', '', array(
-            'options' => array(
-                ''           => '',
-                'nofollow'   => 'nofollow',
-                'noreferrer' => 'noreferrer',
-                'author'     => 'author',
-                'external'   => 'external',
-                'help'       => 'help'
-            )
-        ));
+        new N2ElementLinkTarget($link, 'link-2', n2_('Target window'));
+        new N2ElementLinkRel($link, 'link-3', 'Rel');
 
         $other = new N2ElementGroup($settings, 'item-heading-other');
         new N2ElementList($other, 'priority', 'Tag', 'div', array(

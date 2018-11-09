@@ -138,22 +138,8 @@ class N2SSPluginItemFactoryButton extends N2SSPluginItemFactoryAbstract {
         new N2ElementUrl($link, 'link-1', n2_('Link'), '', array(
             'style' => 'width:236px;'
         ));
-        new N2ElementList($link, 'link-2', n2_('Target window'), '', array(
-            'options' => array(
-                '_self'  => n2_('Self'),
-                '_blank' => n2_('New')
-            )
-        ));
-        new N2ElementList($link, 'link-3', n2_('Rel'), '', array(
-            'options' => array(
-                ''           => '',
-                'nofollow'   => 'nofollow',
-                'noreferrer' => 'noreferrer',
-                'author'     => 'author',
-                'external'   => 'external',
-                'help'       => 'help'
-            )
-        ));
+        new N2ElementLinkTarget($link, 'link-2', n2_('Target window'));
+        new N2ElementLinkRel($link, 'link-3', n2_('Rel'));
 
         $ui = new N2ElementGroup($settings, 'item-button-ui');
         new N2ElementOnOff($ui, 'fullwidth', n2_('Full width'), 1);

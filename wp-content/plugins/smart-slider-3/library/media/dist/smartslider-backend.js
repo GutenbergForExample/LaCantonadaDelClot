@@ -2592,6 +2592,12 @@ N2D('SlidesManager', function ($, undefined) {
                         }
                         break;
                     case 'library':
+                        if (which === 2) {
+                            window.open($(e.currentTarget).data('href'), '_blank').focus();
+                        } else {
+                            window.location = $(e.currentTarget).data('href');
+                        }
+                    
                         break;
                 }
             }
@@ -2841,7 +2847,14 @@ N2D('SlidesManager', function ($, undefined) {
                                             image: data[0].thumbnail_large
                                         });
                                     }, this)).fail(function (data) {
-                                        N2Classes.Notification.error(data.responseText);
+                                        N2Classes.Notification.error('Video not found or private.');
+                                        manager._addQuickVideo(this, {
+                                            type: 'vimeo',
+                                            title: '',
+                                            description: '',
+                                            video: vimeoMatch[3],
+                                            image: ''
+                                        });
                                     });
 
                                 } else if (html5Video) {
@@ -3671,7 +3684,7 @@ N2D('EditorSlide', ['EditorAbstract'], function ($, undefined) {
         nextend.askToSave = true;
         $('#smartslider-form').trigger('saved');
 
-        $('.n2-ss-edit-slide-top-details .n2-h1').html($('#slidetitle').val());
+        $('.n2-ss-edit-slide-top-details .n2-h1').text($('#slidetitle').val());
     };
 
     EditorSlide.prototype.prepareForm = function () {
@@ -6982,6 +6995,8 @@ N2D('FragmentEditor', function ($, undefined) {
                 // If the single layer is already in a group, we just activate that group
                 if (activeLayer.group instanceof N2Classes.Group) {
                     activeLayer.group.activate();
+                } else if (activeLayer instanceof N2Classes.Content || activeLayer instanceof N2Classes.Col) {
+                    // Do nothing for content and Col layers
                 } else {
                     group = new N2Classes.Group(this, this.mainContainer, {}, null);
                     group.create();
@@ -14548,7 +14563,7 @@ N2D('Row', ['LayerContainer', 'ComponentAbstract'], function ($, undefined) {
                         sumWidth += flexLine[j].getWidthPercentage();
                     }
                     for (j = 0; j < flexLine.length; j++) {
-                        flexLine[j].layer.css('width', 'calc(' + (flexLine[j].getWidthPercentage() / sumWidth * 100) + '% - ' + gutterValue + 'px)');
+                        flexLine[j].layer.css('width', 'calc(' + (flexLine[j].getWidthPercentage() / sumWidth * 100) + '% - ' + (n2const.isIE ? gutterValue + 1 : gutterValue) + 'px)');
                     }
                 }
             } else {
@@ -14848,7 +14863,7 @@ N2D('Row', ['LayerContainer', 'ComponentAbstract'], function ($, undefined) {
                     sumWidth += flexLine[j]._tempWidth;
                 }
                 for (j = 0; j < flexLine.length; j++) {
-                    flexLine[j].layer.css('width', 'calc(' + (flexLine[j]._tempWidth / sumWidth * 100) + '% - ' + gutterValue + 'px)');
+                    flexLine[j].layer.css('width', 'calc(' + (flexLine[j]._tempWidth / sumWidth * 100) + '% - ' + (n2const.isIE ? gutterValue + 1 : gutterValue) + 'px)');
                 }
             }
         } else {
@@ -17241,10 +17256,10 @@ N2D('ItemVimeo', ['Item'], function ($, undefined) {
                 N2Classes.AjaxHelper.getJSON('https://vimeo.com/api/v2/video/' + encodeURI(videoCode) + '.json').done($.proxy(function (data) {
                     $('#item_vimeoimage').val(data[0].thumbnail_large).trigger('change');
                 }, this)).fail(function (data) {
-                    N2Classes.Notification.error(data.responseText);
+                    N2Classes.Notification.error('Video not found or private.');
                 });
             } else {
-                N2Classes.Notification.error('The provided URL does not match any known Vimeo url or code!');
+                N2Classes.Notification.error('The provided URL does not match any known Vimeo url or code.');
             }
         }
     };

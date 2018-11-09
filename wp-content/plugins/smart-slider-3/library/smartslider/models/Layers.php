@@ -134,12 +134,7 @@ class N2SmartsliderLayersModel extends N2Model {
         new N2ElementUrl($link, 'link-1', n2_('Link'), '', array(
             'style' => 'width:160px;'
         ));
-        new N2ElementList($link, 'link-2', n2_('Target window'), '', array(
-            'options' => array(
-                '_self'  => n2_('Self'),
-                '_blank' => n2_('New')
-            )
-        ));
+        new N2ElementLinkTarget($link, 'link-2', n2_('Target window'));
 
         $rowBackground = new N2ElementGroup($rowSettings, 'row-background');
         new N2ElementImage($rowBackground, 'row-background-image', n2_('Background image'), '');
